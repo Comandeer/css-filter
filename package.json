@@ -24,8 +24,7 @@
     "CSS filter"
   ],
   "files": [
-    "dist",
-    "tonic-example.js"
+    "dist"
   ],
   "author": {
     "name": "Comandeer",
@@ -36,7 +35,6 @@
     "url": "https://github.com/Comandeer/css-filter/issues"
   },
   "homepage": "https://github.com/Comandeer/css-filter#readme",
-  "tonicExampleFilename": "tonic-example.js",
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
     "chai": "^3.5.0",
