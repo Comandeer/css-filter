@@ -3,6 +3,7 @@ import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
 
 const packageInfo = require( '../../package.json' );
+packageInfo.name = 'css-filter';
 
 config.plugins.push( babel( {
 	presets: [
