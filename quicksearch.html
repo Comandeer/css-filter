@@ -1,0 +1,31 @@
+<html>
+<head>
+</head>
+<body style="background: transparent;">
+    <script src="scripts/docstrap.lib.js"></script>
+    <script src="scripts/lunr.min.js"></script>
+    <script src="scripts/fulltext-search.js"></script>
+
+    <script type="text/x-docstrap-searchdb">
+    {"modules.list.html":{"id":"modules.list.html","title":"Modules","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Modules Classes Filter FilteredDocumentFragment RuleParser × Search results Close "},"classes.list.html":{"id":"classes.list.html","title":"Classes","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Classes Classes Filter FilteredDocumentFragment RuleParser × Search results Close "},"index.html":{"id":"index.html","title":"Index","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser css-filter Library for filtering HTML with CSS selectors. Installationnpm install @comandeer/css-filter [--save]UsageInclude script in your site: &lt;script src=&quot;node_modules/@comandeer/css-filter/dist/css-filter.umd.js&quot;&gt;&lt;/script&gt;Under window.cssFilter you will find our library with some fancy methods (see API docs for details). The simplest way to use the library is to create filter using the factory: const filter = cssFilter.default( 'i' ); const filtered = filter.filter( `&lt;div&gt; &lt;span&gt; &lt;i&gt;Only i tag will be preserved&lt;/i&gt; &lt;/span&gt; &lt;/div&gt;` ); console.log( filtered.innerHTML ); // &lt;i&gt;Only i tag will be preserved&lt;/i&gt;All valid CSS selectors could be used as a rule (however not all valid CSS selectors make sense as such rules…). DocumentationAPI docs are available at http://comandeer.github.io/css-filter × Search results Close "},"Filter.html":{"id":"Filter.html","title":"Class: Filter","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Class: Filter Filter Class performing the filtering. new Filter(rules, parser) Creates new filter's instance. Parameters: Name Type Description rules String | Array.&lt;String&gt; Rules passed as a string or an array of strings. parser RuleParser | Object Rules' syntax to CSS parser. Methods addRule(rule [, disableReparse]) Add given rule to the current's filter instance. Parameters: Name Type Argument Default Description rule String Rule to be added. disableReparse Boolean &lt;optional&gt; false Indicates if reparsing the rules should be forbidden. Returns: Type undefined addRules(rules) Add given rules to the current's filter instance. Parameters: Name Type Description rules Array.&lt;String&gt; Rules to be added. Returns: Type undefined filter(input) Filters given HTML string/DocumentFragment using CSS selectors. Parameters: Name Type Description input DocumentFragment | HTMLElement | String DocumentFragment will be constructed from this parameter. Returns: Filtered DocumentFragment. Type FilteredDocumentFragment × Search results Close "},"FilteredDocumentFragment.html":{"id":"FilteredDocumentFragment.html","title":"Class: FilteredDocumentFragment","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Class: FilteredDocumentFragment FilteredDocumentFragment Represents filtered DOM tree new FilteredDocumentFragment() Creates new instance of filter's results. Members innerHTML :String Allows to get or set the content of the `DocumentFragment` as a HTML code. Type: String × Search results Close "},"module-utils.html":{"id":"module-utils.html","title":"Module: utils","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Module: utils Methods &lt;inner&gt; createDocumentFragmentFromString(html) Creates `DocumentFragment` from given HTML string. Parameters: Name Type Description html String HTML string. Returns: Proper `DocumentFragment`. Type DocumentFragment &lt;inner&gt; getHTMLFromDocumentFragment(documentFragment) Gets HTML from `DocumentFragment`. Parameters: Name Type Description documentFragment DocumentFragment `DocumentFragment`. Returns: HTML string. Type String &lt;inner&gt; removeAllChildren(element) Remove all children from element. Parameters: Name Type Description element HTMLElement | DocumentFragment HTML element with children to be deleted. Returns: Type undefined &lt;inner&gt; replaceElementWithChildren(element) Replaces element with its children. Parameters: Name Type Description element HTMLElement DOM element. Returns: Type undefined × Search results Close "},"RuleParser.html":{"id":"RuleParser.html","title":"Class: RuleParser","body":" css-filter Modules utils Classes FilterFilteredDocumentFragmentRuleParser Class: RuleParser RuleParser Class parsing rules' syntax into proper CSS syntax. new RuleParser() Methods join(rules) Joins given rules to form syntactically valid CSS selector. Parameters: Name Type Description rules Array.&lt;String&gt; Filter's rules. Returns: CSS selector. Type String parse(rule) Converts given rule into syntactically valid CSS selector. Parameters: Name Type Description rule String Filter's rule. Returns: CSS selector. Type String × Search results Close "}}
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Searcher.init();
+        });
+
+        $(window).on("message", function(msg) {
+            var msgData = msg.originalEvent.data;
+
+            if (msgData.msgid != "docstrap.quicksearch.start") {
+                return;
+            }
+
+            var results = Searcher.search(msgData.searchTerms);
+
+            window.parent.postMessage({"results": results, "msgid": "docstrap.quicksearch.done"}, "*");
+        });
+    </script>
+</body>
+</html>
