@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Simple library for filtering HTML using CSS selectors.",
   "main": "dist/css-filter.umd.js",
-  "jsnext:main": "dist/Css-filter.js",
+  "jsnext:main": "dist/css-filter.js",
   "scripts": {
     "lint": "eslint -c config/eslint/default.json src/**/*.js tests/**/*.js",
     "pretest": "npm run lint",
