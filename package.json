@@ -65,5 +65,8 @@
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "lodash.difference": "^4.4.0"
   }
 }
