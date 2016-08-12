@@ -92,7 +92,7 @@ module.exports = function( config ) {
 					require( 'rollup-plugin-commonjs' )(),
 					require( 'rollup-plugin-node-resolve' )( {
 						jsnext: true,
-						main: false
+						main: true
 					} )
 				]
 			},

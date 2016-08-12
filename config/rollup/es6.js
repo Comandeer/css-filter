@@ -11,7 +11,7 @@ export default {
 	plugins: [
 		nodeResolve( {
 			jsnext: true,
-			main: false
+			main: true
 		} ),
 		convertCJS()
 	],
