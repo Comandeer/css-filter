@@ -7,8 +7,9 @@ packageInfo.name = 'css-filter';
 
 config.plugins.push( babel( {
 	presets: [
-		'es2015-rollup'
-	]
+		[ 'es2015', { modules: false } ]
+	],
+	plugins: [ 'external-helpers' ]
 } ) );
 config.plugins.push( uglify( {
 	comments: '/^/*!/',
