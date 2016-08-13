@@ -1,6 +1,6 @@
 {
   "name": "@comandeer/css-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple library for filtering HTML using CSS selectors.",
   "main": "dist/css-filter.umd.js",
   "jsnext:main": "dist/css-filter.js",
