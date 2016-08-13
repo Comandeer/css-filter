@@ -14,7 +14,8 @@
     "publish-docs": "npm run build-docs && git checkout gh-pages && ncp docs/dist ./ && git add -A && git commit -m \"[ci skip] Updated docs.\" && git push origin gh-pages && git checkout master",
     "preversion": "npm test",
     "postversion": "git push origin && git push origin --tags",
-    "prepublish": "in-publish && npm run build || exit 0"
+    "prepublish": "in-publish && npm run build || exit 0",
+    "postpublish": "greenkeeper-postpublish"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "babel-preset-es2015": "^6.13.2",
     "chai": "^3.5.0",
     "eslint": "^3.0.1",
+    "greenkeeper-postpublish": "^1.0.1",
     "in-publish": "^2.0.0",
     "ink-docstrap": "^1.2.1",
     "is-travis": "^1.0.0",
