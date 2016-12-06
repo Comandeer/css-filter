@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Filter.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Filter.html">Filter</a><ul class='methods'><li data-type='method'><a href="Filter.html#addRule">addRule</a></li><li data-type='method'><a href="Filter.html#addRules">addRules</a></li><li data-type='method'><a href="Filter.html#filter">filter</a></li></ul></li><li><a href="FilteredDocumentFragment.html">FilteredDocumentFragment</a></li><li><a href="RuleParser.html">RuleParser</a><ul class='methods'><li data-type='method'><a href="RuleParser.html#join">join</a></li><li data-type='method'><a href="RuleParser.html#parse">parse</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-utils.html">utils</a><ul class='methods'><li data-type='method'><a href="module-utils.html#~createDocumentFragmentFromString">createDocumentFragmentFromString</a></li><li data-type='method'><a href="module-utils.html#~getHTMLFromDocumentFragment">getHTMLFromDocumentFragment</a></li><li data-type='method'><a href="module-utils.html#~removeAllChildren">removeAllChildren</a></li><li data-type='method'><a href="module-utils.html#~replaceElementWithChildren">replaceElementWithChildren</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Filter.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import difference from 'lodash.difference';
+import { createDocumentFragmentFromString } from './utils';
+import { replaceElementWithChildren } from './utils';
+import FilteredDocumentFragment from './FilteredDocumentFragment';
+
+function checkParser( parser ) {
+	if ( typeof parser !== 'object' || typeof parser.parse !== 'function' ) {
+		throw new TypeError( 'Filter constructor requires proper rules\' parser as a 2. parameter.' );
+	}
+}
+
+function parseRulesParam( rules ) {
+	if ( typeof rules === 'string' ) {
+		return [ rules ];
+	} else if ( Array.isArray( rules ) ) {
+		return rules;
+	}
+
+	throw new TypeError( 'Rules must be supplied to filter\'s constructor as a string or an array of strings.' );
+}
+
+function parseFilterInput( input ) {
+	if ( input instanceof DocumentFragment ) {
+		return input;
+	}
+
+	if ( input instanceof HTMLElement ) {
+		const documentFragment = document.createDocumentFragment();
+
+		documentFragment.appendChild( input );
+
+		return documentFragment;
+	}
+
+	if ( typeof input === 'string' ) {
+		return createDocumentFragmentFromString( input );
+	}
+
+	throw new TypeError( 'Filter method requires string, DocumentFragment or HTMLElement as an input.' );
+}
+
+/** Class performing the filtering. */
+class Filter {
+	/**
+	 * Creates new filter's instance.
+	 *
+	 * @param {String|String[]} rules Rules passed as a string or an array of strings.
+	 * @param {RuleParser|Object} parser Rules' syntax to CSS parser.
+	 * @class
+	 */
+	constructor( rules, parser ) {
+		checkParser( parser );
+
+		this.rules = parseRulesParam( rules );
+		this.parsedRule = null;
+		this.parser = parser;
+	}
+
+	/**
+	 * Add given rule to the current's filter instance.
+	 *
+	 * @param {String} rule Rule to be added.
+	 * @param {Boolean} [disableReparse=false] Indicates if reparsing the rules should be forbidden.
+	 * @return {undefined}
+	 */
+	addRule( rule, disableReparse = false ) {
+		if ( typeof rule !== 'string' ) {
+			throw new TypeError( 'New rule must be a string.' );
+		}
+
+		this.rules.push( rule );
+
+		if ( this.parsedRule &amp;&amp; !disableReparse ) {
+			this._parseRules();
+		}
+	}
+
+	/**
+	 * Add given rules to the current's filter instance.
+	 *
+	 * @param {String[]} rules Rules to be added.
+	 * @return {undefined}
+	 */
+	addRules( rules ) {
+		if ( !Array.isArray( rules ) || rules.length &lt; 1 ) {
+			throw new TypeError( 'New rules must be passed inside an array.' );
+		}
+
+		for ( let rule of rules ) { // eslint-disable-line prefer-const
+			this.addRule( rule, true );
+		}
+
+		if ( this.parsedRule ) {
+			this._parseRules();
+		}
+	}
+
+	/**
+	 * Filters given HTML string/DocumentFragment using CSS selectors.
+	 *
+	 * @param {DocumentFragment|HTMLElement|String} input DocumentFragment will be constructed from
+	 * this parameter.
+	 * @return {FilteredDocumentFragment} Filtered DocumentFragment.
+	*/
+	filter( input ) {
+		const documentFragment = parseFilterInput( input );
+		const allElements = documentFragment.querySelectorAll( '*' );
+		const filteredDocumentFragment = new FilteredDocumentFragment();
+
+		if ( typeof this.parsedRule !== 'string' ) {
+			this._parseRules();
+		}
+
+		const allowedElements = documentFragment.querySelectorAll( this.parsedRule );
+		const elementsToRemove = difference( allElements, allowedElements );
+
+		for ( let element of elementsToRemove ) { // eslint-disable-line prefer-const
+			replaceElementWithChildren( element );
+		}
+
+		filteredDocumentFragment.appendChild( documentFragment );
+
+		return filteredDocumentFragment;
+	}
+
+	/**
+	 * Parsed filter's rules into valid CSS selectors using passed in parser.
+	 *
+	 * @return {undefined}
+	 * @private
+	 */
+	_parseRules() {
+		this.parsedRule = this.parser.join( this.rules.map( this.parser.parse ) );
+	}
+}
+
+export default Filter;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Dec 06 2016 23:09:18 GMT+0100 (CET) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
