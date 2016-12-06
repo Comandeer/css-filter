@@ -1,10 +1,6 @@
-// Karma configuration
-// Generated on Sun Mar 20 2016 23:19:01 GMT+0100 (CET)
-
-const isTravis = require( 'is-travis' );
-
 module.exports = function( config ) {
 	config.set( {
+		failOnEmptyTestSuite: false,
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
 		basePath: '../../',
@@ -35,7 +31,7 @@ module.exports = function( config ) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'tests/**/*.js': [ 'rollup', 'coverage' ],
+			'tests/**/*.js': [ 'rollup' ],
 			'tests/support/fixtures/**/*.html': [ 'html2js' ],
 			'tests/support/fixtures/**/*.json': [ 'json_fixtures' ]
 		},
@@ -69,9 +65,7 @@ module.exports = function( config ) {
 
 		// start these browsers
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: isTravis ? [
-			'Firefox'
-		] : [
+		browsers: [
 			'Chrome',
 			'Firefox'
 		],
@@ -88,6 +82,9 @@ module.exports = function( config ) {
 		rollupPreprocessor: {
 			rollup: {
 				plugins: [
+					require( 'rollup-plugin-istanbul' )( {
+						exclude: [ 'tests/**/*.js' ]
+				    } ),
 					require( 'rollup-plugin-mockr' )( require( '../mockr/default' ) ),
 					require( 'rollup-plugin-commonjs' )(),
 					require( 'rollup-plugin-node-resolve' )( {
@@ -106,7 +103,10 @@ module.exports = function( config ) {
 		},
 
 		coverageReporter: {
-			type: 'text-summary'
+			reporters: [
+				{ type: 'text-summary' },
+				{ type: 'lcovonly' }
+			]
 		}
 	} );
 };

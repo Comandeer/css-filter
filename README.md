@@ -1,6 +1,6 @@
 # css-filter
 
-[![Build Status](https://travis-ci.org/Comandeer/css-filter.svg?branch=master)](https://travis-ci.org/Comandeer/css-filter) [![Dependency Status](https://david-dm.org/Comandeer/css-filter.svg)](https://david-dm.org/Comandeer/css-filter) [![devDependency Status](https://david-dm.org/Comandeer/css-filter/dev-status.svg)](https://david-dm.org/Comandeer/css-filter#info=devDependencies)
+[![Build Status](https://travis-ci.org/Comandeer/css-filter.svg?branch=master)](https://travis-ci.org/Comandeer/css-filter) · [![Dependency Status](https://david-dm.org/Comandeer/css-filter.svg)](https://david-dm.org/Comandeer/css-filter) · [![devDependency Status](https://david-dm.org/Comandeer/css-filter/dev-status.svg)](https://david-dm.org/Comandeer/css-filter#info=devDependencies) · [![Known Vulnerabilities](https://snyk.io/test/github/bemquery/bemquery-package-boilerplate/badge.svg)](https://snyk.io/test/github/Comandeer/css-filter) · [![npm version](https://badge.fury.io/js/@comandeer/css-filter.svg)](https://badge.fury.io/js/@comandeer/css-filter) · [![Bower version](https://badge.fury.io/bo/css-filter.svg)](https://badge.fury.io/bo/css-filter) · [![codecov](https://codecov.io/gh/Comandeer/css-filter/branch/master/graph/badge.svg)](https://codecov.io/gh/Comandeer/css-filter)
 
 Library for filtering HTML with CSS selectors.
 
@@ -8,9 +8,15 @@ Library for filtering HTML with CSS selectors.
 
 ## Installation
 
+You can install this package from npm:
 ```bash
 npm install @comandeer/css-filter [--save]
 ```
+You can also install it from bower:
+```bash
+bower install css-filter
+```
+
 ## Usage
 
 Include script in your site:

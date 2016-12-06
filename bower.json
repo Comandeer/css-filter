@@ -1,0 +1,28 @@
+{
+  "name": "css-filter",
+  "description": "Simple library for filtering HTML using CSS selectors.",
+  "main": "dist/css-filter.umd.js",
+  "authors": [
+      {
+        "name": "Comandeer",
+        "url": "https://github.com/Comandeer"
+      }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "CSS filter"
+  ],
+  "homepage": "https://github.com/Comandeer/css-filter",
+  "ignore": [
+      "**/.*",
+      "node_modules",
+      "bower_components",
+      "config",
+      "CONTRIBUTING.md",
+      "docs",
+      "test",
+      "tests",
+      "tonic-example.js",
+      "src"
+  ]
+}
