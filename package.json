@@ -59,7 +59,7 @@
   "homepage": "https://github.com/Comandeer/css-filter#readme",
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.8.0",
-    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-es2015": "^6.24.1",
     "chai": "^3.5.0",
     "codecov": "^2.0.1",
     "commitplease": "^2.7.2",
