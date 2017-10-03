@@ -67,7 +67,7 @@
     "docdash": "^0.4.0",
     "eslint": "^3.0.1",
     "greenkeeper-postpublish": "^1.0.1",
-    "husky": "^0.13.2",
+    "husky": "^0.15.0-beta.2",
     "in-publish": "^2.0.0",
     "jsdoc": "^3.4.0",
     "karma": "^1.0.0",
