@@ -63,7 +63,7 @@
     "chai": "^3.5.0",
     "codecov": "^2.0.1",
     "commitplease": "^2.7.2",
-    "cz-conventional-changelog": "^2.0.0",
+    "cz-conventional-changelog": "2.0.0",
     "docdash": "^0.4.0",
     "eslint": "^3.0.1",
     "greenkeeper-postpublish": "^1.0.1",
